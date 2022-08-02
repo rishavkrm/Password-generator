@@ -1,7 +1,9 @@
 import json
+from tkinter import messagebox
 
 
-def find_password(website_entry, messagebox):
+def find_password():
+    from gui import website_entry
     website = website_entry.get()
     try:
         with open("data.json") as data_file:

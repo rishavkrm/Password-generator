@@ -1,101 +1,71 @@
 import tkinter as tk
 import customtkinter
 
+root_tk = customtkinter.CTk()
 
-# # ---------------------------- UI SETUP ------------------------------- #
-#
-# window = Tk()
-# window.title("Password Manager")
-# window.config(padx=50, pady=50)
-#
-# canvas = Canvas(height=200, width=200)
-# logo_img = PhotoImage(file="logo.png")
-# canvas.create_image(100, 100, image=logo_img)
-# canvas.grid(row=0, column=1)
-#
-# # Labels
+# root_tk.geometry(f"{600}x{500}")
+root_tk.title("Password generator")
+logo_img = tk.PhotoImage(file="lock (3).png")
+main_label = customtkinter.CTkLabel(master=root_tk,
+                                    corner_radius=8, image=logo_img)
+main_label.place(relx=0.5, rely=0.1, anchor=tk.CENTER)
+
+logo_label = customtkinter.CTkLabel(master=root_tk, text="Password Generator",
+                                    corner_radius=8, text_font=('Egyptian nights', 50))
+logo_label.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
+
+# # labels
+# Labels
+website_label = customtkinter.CTkLabel(master=root_tk, text="Website:",
+                                       corner_radius=8)
 # website_label = Label(text="Website:")
-# website_label.grid(row=1, column=0)
+website_label.place(relx=0.2, rely=0.5, anchor=tk.CENTER)
+email_label = customtkinter.CTkLabel(master=root_tk, text="Email/Username:",
+                                     corner_radius=8)
 # email_label = Label(text="Email/Username:")
-# email_label.grid(row=2, column=0)
+email_label.place(relx=0.2, rely=0.65, anchor=tk.CENTER)
+password_label = customtkinter.CTkLabel(master=root_tk, text="Password:",
+                                        corner_radius=8)
 # password_label = Label(text="Password:")
-# password_label.grid(row=3, column=0)
-#
-# # Entries
-# website_entry = Entry(width=21)
-# website_entry.grid(row=1, column=1)
-# website_entry.focus()
-# email_entry = Entry(width=35)
-# email_entry.grid(row=2, column=1, columnspan=2)
-# email_entry.insert(0, "lenargasimov@gmail.com")
-# password_entry = Entry(width=21)
-# password_entry.grid(row=3, column=1)
-#
-# # Buttons
-# search_button = Button(text="Search", width=13, command=find_password)
-# search_button.grid(row=1, column=2)
-# generate_password_button = Button(text="Generate Password", command=generate_password)
-# generate_password_button.grid(row=3, column=2)
-# add_button = Button(text="Add", width=36, command=save)
-# add_button.grid(row=4, column=1, columnspan=2)
-#
-# window.mainloop()
-# #
-class App(customtkinter.CTk):
-    def __init__(self):
-        super().__init__()
+password_label.place(relx=0.2, rely=0.8, anchor=tk.CENTER)
 
-        # self.geometry(f"{600}x{500}")
-        self.title("Password generator")
-        canvas = tk.Canvas(height=200, width=200)
-        logo_img = tk.PhotoImage(file="logo.png")
-        canvas.create_image(100, 100, image=logo_img)
-        canvas.grid(row=0, column=1)
-        # labels
-        # Labels
-        website_label = customtkinter.CTkLabel(master=self, text="Website:", fg_color=("white", "gray75"),
-                                               corner_radius=8)
-        # website_label = Label(text="Website:")
-        website_label.grid(row=1, column=0)
-        email_label = customtkinter.CTkLabel(master=self, text="Email/Username:", fg_color=("white", "gray75"),
-                                             corner_radius=8)
-        # email_label = Label(text="Email/Username:")
-        email_label.grid(row=2, column=0)
-        password_label = customtkinter.CTkLabel(master=self, text="Password:", fg_color=("white", "gray75"),
-                                                corner_radius=8)
-        # password_label = Label(text="Password:")
-        password_label.grid(row=3, column=0)
+##ENtries
+# Entries
 
-        ##ENtries
-        # Entries
+website_entry = customtkinter.CTkEntry(master=root_tk, placeholder_text="Website name", width=150, border_width=2,
+                                       corner_radius=10)
+website_entry.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+website_entry.focus()
+email_entry = customtkinter.CTkEntry(master=root_tk, placeholder_text="Email/Username", width=150, border_width=2,
+                                     corner_radius=10)
+email_entry.place(relx=0.5, rely=0.65, anchor=tk.CENTER)
+password_entry = customtkinter.CTkEntry(master=root_tk, placeholder_text="Password", width=150, border_width=2,
+                                        corner_radius=10)
+password_entry.place(relx=0.5, rely=0.8, anchor=tk.CENTER)
 
-        website_entry = customtkinter.CTkEntry(master=self, placeholder_text="Website name", width=21, border_width=2,
-                                               corner_radius=10)
-        website_entry.grid(row=1, column=1)
-        website_entry.focus()
-        email_entry = customtkinter.CTkEntry(master=self, placeholder_text="Website name", width=35, border_width=2,
-                                             corner_radius=10)
-        email_entry.grid(row=2, column=1, columnspan=2)
-        email_entry.insert(0, "rishavkumar2573@gmail.com")
-        password_entry = customtkinter.CTkEntry(master=self, placeholder_text="Website name", width=21, border_width=2,
-                                                corner_radius=10)
-        password_entry.grid(row=3, column=1)
+# Buttons
+# Buttons
+from find_password import find_password
 
-        # Buttons
-        # Buttons
-        from find_password import find_password
-        import generate_password
-        from save_password import save
-        find_password = find_password(website_entry, tk.messagebox)
-        search_button = customtkinter.CTkButton(master=self, width=13, border_width=0, corner_radius=8, text="Search",
-                                                command=find_password)
-        search_button.grid(row=1, column=2)
+search_button = customtkinter.CTkButton(master=root_tk, width=13, border_width=0, corner_radius=8, text="Search",
+                                        command=find_password)
+search_button.place(relx=0.8, rely=0.5, anchor=tk.CENTER)
+from generate_password import generate_password
 
-        generate_password = generate_password()
-        generate_password_button = customtkinter.CTkButton(master=self, border_width=0, corner_radius=8,
-                                                           text="CTkButton", command=generate_password)
-        generate_password_button.grid(row=3, column=2)
 
-        add_button = customtkinter.CTkButton(master=self, width=120, border_width=0, corner_radius=8, text="Add",
-                                             command=save)
-        add_button.grid(row=4, column=1, columnspan=2)
+def gen_password():
+    password = generate_password()
+    password_entry.insert(tk.INSERT, password)
+
+
+generate_password_button = customtkinter.CTkButton(master=root_tk, border_width=0, corner_radius=8,
+                                                   text="Generate", command=gen_password)
+generate_password_button.place(relx=0.3, rely=0.9, anchor=tk.CENTER)
+
+from save_password import save
+
+add_button = customtkinter.CTkButton(master=root_tk, width=120, border_width=0, corner_radius=8, text="Add",
+                                     command=save)
+add_button.place(relx=0.7, rely=0.9, anchor=tk.CENTER)
+
+# root_tk.mainloop()

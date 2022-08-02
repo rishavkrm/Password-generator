@@ -1,6 +1,8 @@
 # from tkinter import *
 import json
-from gui import App
+import tkinter
+from tkinter import messagebox
+from gui import website_entry, email_entry, password_entry
 
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
@@ -33,5 +35,5 @@ def save():
                 # Saving updated data
                 json.dump(data, data_file, indent=4)
         finally:
-            website_entry.delete(0, END)
-            password_entry.delete(0, END)
+            website_entry.delete(0, tkinter.END)
+            password_entry.delete(0, tkinter.END)
